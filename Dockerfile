@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-ENV ENV='production'
+ENV ENV='development'
 
 EXPOSE 5000
 

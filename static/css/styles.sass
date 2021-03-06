@@ -1,54 +1,81 @@
 *
-    font-family: 'Cabin', sans-serif!important
+    font-family: 'Manrope', sans-serif!important
 
 body 
     background-color: rgb(0, 202, 201)
-    overflow-y: hidden
-
+    // overflow: hidden
 
 #intro
-    position: absolute
-    top: 200px
-    right: 50px
-    text-align: center
-
+    text-align: left
+    z-index: 1000
+    margin-top: 150px
     h1
-        font-size: 45pt!important
-        font-weight: bolder
+        font-size: 45pt
+        font-weight: bolders
         letter-spacing: 3px
     p
-        font-size: 35pt!important
-        span
-            font-weight: bolder
+        font-size: 35pt
 
 #code-img
     transform: rotate(17deg) skew(-4deg, 4deg)
     border-radius: 25px
     box-shadow: 7px 9px 49px -15px rgba(0,0,0,0.75)
-    width: 40%
+    width: 50%
     opacity: 0.9
     position: absolute
-    top: 50px
-    left: 70px
+    top: 100px
+    left: 80px
+
+.col
+    border-radius: 15px
+
+#get-in-touch
+    z-index: 3000!important
+    form
+        margin-bottom: 300px
+
+.alert 
+    position: absolute
+    top: 100px
+    left: 40px
+    z-index: 4000
+    margin-right: 40px
 
 
-@media only screen and (max-width: 950px)
+@media only screen and (min-width: 1200px)
     #code-img
-        width: 60%
-        left: 35px
+        width: 650px
+        left: 150px
 
-@media only screen and (max-width: 650px)
+@media only screen and (max-width: 900px)
     #code-img
-        left: 75px
+        left: 100px
+    #intro
+        margin-top: 75px
+        h1
+            font-size: 37pt
+        p
+            font-size: 28pt
 
-@media only screen and (max-width: 500px)
+@media only screen and (max-width: 750px)
     #code-img
         width: 80%
-        left: 40px
+        left: 30px
     #intro
-        top: 200px
-        right:  0px
+        margin-top: 50px
         h1
-            font-size: 30pt!important
+            font-size: 40pt
         p
-            font-size: 30pt!important
+            font-size: 30pt
+
+@media only screen and (max-width: 350px)
+    #code-img
+        width: 80%
+        left: 30px
+    #intro
+        margin-top: 100px
+
+        h1
+            font-size: 30pt
+        p
+            font-size: 25pt

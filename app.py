@@ -1,11 +1,25 @@
-from flask import Flask, render_template
-from config import ProdConfig, DevConfig
+from flask import (
+    Flask, 
+    render_template, 
+    request, 
+    escape,
+    flash,
+    redirect,
+    url_for
+)
+from config import (
+    ProdConfig, 
+    DevConfig
+)
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
+
 app = Flask(__name__)
+
 
 if os.getenv('ENV') == 'production':
     app.config.from_object(ProdConfig)
@@ -15,8 +29,30 @@ else:
     raise NotImplementedError('** ! ENV not set. **')
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        email = escape(request.form.get('email'))
+        message = escape(request.form.get('message'))
+
+        if not email or not message:
+            flash('You need to complete both email and message fields.', 'danger')
+            return redirect(url_for('home'))
+
+        sendEmail(
+            email_subject='New Contact',
+            recipients=['jjasilva85@gmail.com'],
+            app=app,
+            mail=mail,
+            email_html=render_template('_email.html', email=email, message=message)
+        )
+        flash('Your message has been sent.', 'success')
+        return redirect(url_for('home'))
+    return render_template('home.html')
+
+
+@app.route('/projects')
+def projects():
     return render_template('home.html')
 
 

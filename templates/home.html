@@ -3,17 +3,39 @@
 {% block head %}{% endblock %}
 
 {% block body %}
-  <div>
-    <img 
-      class="mt-5"
-      id="code-img" 
-      src="{{ url_for('static', filename='imgs/code_2.png') }}" 
-      alt="Some random bit of code from wools.joao.dev project">
+  <div class="row">
+    <div class="col">
+      <img 
+        class="mt-5"
+        id="code-img" 
+        src="{{ url_for('static', filename='imgs/code_2.png') }}" 
+        alt="Some random bit of code from wools.joao.dev project">
+    </div>
+    <div id="intro" class="col-md-6 p-5">
+      <h1 class="text-white">&lt; Full-Stack Developer &gt;</h1>
+      <p class="text-white mt-4 p-3">Hi, my name is Joao and I'm a developer.</p>
+      <div class="row">
+        <div class="col">
+          <a class="btn mt-4 btn-light btn-lg" href="{{ url_for('projects') }}">See my work</a>
+        </div>
+        <div class="col">
+          <a class="btn mt-4 btn-light btn-lg" href="#get-in-touch">Say hello</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id="intro">
-    <h1 class="text-white">&lt; Python Developer &gt;</h1>
-    <p class="text-white mt-4 p-3">Hi, my name is <span>Joao</span> and I'm a developer.</p>
-    <button class="btn mt-4 btn-outline-light btn-lg">See my work</button>
+  <div class="row" style="margin-top: 400px;">
+    <div class="col-md-5 m-auto" id="get-in-touch">
+      <form action="/" method="POST">
+        <h2 class="text-white">Say hello</h2>
+        <div class="form-group mt-4">
+          <input type="email" class="form-control" name="email" placeholder="Your email" required>
+          <small id="emailHelp" class="form-text text-muted">Your email will not be stored.</small>
+        </div>
+        <textarea required placeholder="Your message here..." class="form-control mt-4" name="message" id="message" cols="30" rows="10"></textarea>
+        <button type="submit" class="btn btn-dark mt-4">Submit</button>
+      </form>
+    </div>
   </div>
 {% endblock %}
 
