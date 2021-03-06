@@ -13,7 +13,7 @@ from config import (
 )
 import os
 from dotenv import load_dotenv
-from gmail import notifyme
+from utils import notifyme
 from threading import Thread
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
