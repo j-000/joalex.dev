@@ -16,10 +16,12 @@ class Config(object):
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD'),
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
 
+
 class ProdConfig(Config):
     ENV = 'production'
     SERVER_NAME = 'joalex.dev'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///prod.db'
+
 
 class DevConfig(Config):
     ENV = 'development'
