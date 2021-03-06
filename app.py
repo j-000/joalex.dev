@@ -41,7 +41,7 @@ def home():
 
         flash('Your message has been sent.', 'success')
         
-        # handle message
+        # handle message 
 
         return redirect(url_for('home'))
     return render_template('home.html')
