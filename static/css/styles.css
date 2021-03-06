@@ -6,6 +6,10 @@ body {
   background-color: #00cac9;
 }
 
+.project-container h2 span.bg-dark {
+  padding: 0 10px 0 10px;
+}
+
 #intro {
   text-align: left;
   z-index: 1000;

@@ -39,21 +39,17 @@ def home():
             flash('You need to complete both email and message fields.', 'danger')
             return redirect(url_for('home'))
 
-        sendEmail(
-            email_subject='New Contact',
-            recipients=['jjasilva85@gmail.com'],
-            app=app,
-            mail=mail,
-            email_html=render_template('_email.html', email=email, message=message)
-        )
         flash('Your message has been sent.', 'success')
+        
+        # handle message
+
         return redirect(url_for('home'))
     return render_template('home.html')
 
 
 @app.route('/projects')
 def projects():
-    return render_template('home.html')
+    return render_template('projects.html')
 
 
 if __name__ == '__main__':
