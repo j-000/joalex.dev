@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <div>
+    <img 
+      class="mt-5"
+      id="code-img" 
+      src="{{ url_for('static', filename='imgs/code_2.png') }}" 
+      alt="Some random bit of code from wools.joao.dev project">
+  </div>
+  <div id="intro">
+    <h1 class="text-white">&lt; Python Developer &gt;</h1>
+    <p class="text-white mt-4 p-3">Hi, my name is <span>Joao</span> and I'm a developer.</p>
+    <button class="btn mt-4 btn-outline-light btn-lg">See my work</button>
+  </div>
+{% endblock %}
+
+{% block js %}{% endblock %}
+

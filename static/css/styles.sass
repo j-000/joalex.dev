@@ -1,0 +1,54 @@
+*
+    font-family: 'Cabin', sans-serif!important
+
+body 
+    background-color: rgb(0, 202, 201)
+    overflow-y: hidden
+
+
+#intro
+    position: absolute
+    top: 200px
+    right: 50px
+    text-align: center
+
+    h1
+        font-size: 45pt!important
+        font-weight: bolder
+        letter-spacing: 3px
+    p
+        font-size: 35pt!important
+        span
+            font-weight: bolder
+
+#code-img
+    transform: rotate(17deg) skew(-4deg, 4deg)
+    border-radius: 25px
+    box-shadow: 7px 9px 49px -15px rgba(0,0,0,0.75)
+    width: 40%
+    opacity: 0.9
+    position: absolute
+    top: 50px
+    left: 70px
+
+
+@media only screen and (max-width: 950px)
+    #code-img
+        width: 60%
+        left: 35px
+
+@media only screen and (max-width: 650px)
+    #code-img
+        left: 75px
+
+@media only screen and (max-width: 500px)
+    #code-img
+        width: 80%
+        left: 40px
+    #intro
+        top: 200px
+        right:  0px
+        h1
+            font-size: 30pt!important
+        p
+            font-size: 30pt!important

@@ -6,6 +6,8 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
+ENV ENV='production'
+
 EXPOSE 5000
 
 ENTRYPOINT ["python"]
