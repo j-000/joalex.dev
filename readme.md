@@ -1,7 +1,7 @@
 # joalex.dev
 
 <p align="center">
-    <img src="https://github.com/j-000/joalex.dev/blob/master/static/imgs/website.PNG" />
+    <img src="https://github.com/j-000/joalex.dev/blob/master/static/imgs/mywebsite.png" />
 </p>
 
 
