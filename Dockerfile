@@ -7,6 +7,9 @@ COPY . .
 RUN pip install -r requirements.txt
 
 ENV ENV='production'
+ENV MAIL_USERNAME=''
+ENV MAIL_PASSWORD=''
+ENV MAIL_DEFAULT_SENDER=''
 
 EXPOSE 5000
 
