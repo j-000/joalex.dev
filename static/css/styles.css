@@ -4,20 +4,37 @@
 
 body {
   background-color: #00cac9;
+  overflow-x:hidden;
 }
 
 .project-container h2 span.bg-dark {
   padding: 0 10px 0 10px;
 }
 
+.jumbotron{
+    background-color:white!important;
+}
+
 .project-img {
   box-shadow: 7px 9px 49px -15px rgba(0, 0, 0, 0.75);
+}
+
+.pl-3{
+    padding-left: 20px!important;
+}
+
+.bg-light{
+    background-color: white!important;
+}
+
+.pr-3{
+    padding-right: 20px!important;
 }
 
 #intro {
   text-align: left;
   z-index: 1000;
-  margin-top: 150px;
+  margin-top: 60px;
 }
 #intro h1 {
   font-size: 45pt;
