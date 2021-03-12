@@ -31,18 +31,28 @@
             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about-me">About me</a>
+            <a class="nav-link" href="/#about-me">About me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
+            <a class="nav-link" href="/#services">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#pricing">Pricing</a>
+            <a class="nav-link" href="/#pricing">Pricing</a>
           </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
       <div class="navbar-text">
         hello@joalex.dev
+
+        {% if current_user.is_authenticated %}
+        <span class="badge badge-pill badge-success">Logged in!</span>
+        {% endif %}
+
       </div>
     </nav>
     <div class="m-3">

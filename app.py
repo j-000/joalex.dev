@@ -100,6 +100,14 @@ def admin():
     return render_template('protected/admin.html', messages=messages)
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Bye for now.', 'success')
+    return redirect(url_for('home'))
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
