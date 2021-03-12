@@ -7,8 +7,8 @@ from models import (
 
 
 def main(pwd):
-    User(name='Joao', surname='Oliveira', email='hello@joalex.dev', password=pwd, is_admin=True)
     Base.metadata.create_all(bind=engine)
+    User(name='Joao', surname='Oliveira', email='hello@joalex.dev', password=pwd, is_admin=True)
 
 
 if __name__ == '__main__':
