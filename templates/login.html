@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>joalex.dev | Python Developer | Full-Stack Developer | Freelancer | Login </title>
+{% endblock %}
+
+{% block body %}
+<h1>Login</h1>
+<form action="{{ url_for('login') }}" method="post">
+  <input type="text" name="email">
+  <input type="password" name="password">
+  <input type="submit" value="Log in">
+</form>
+{% endblock %}

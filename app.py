@@ -1,34 +1,32 @@
+import os
+from threading import Thread
 from flask import (
-    Flask, 
-    render_template, 
+    render_template,
     request, 
     escape,
     flash,
     redirect,
     url_for
 )
+from flask_login import (
+    login_required,
+    login_user,
+    logout_user,
+)
+from server import (
+    login_manager,
+    limiter,
+    app
+)
 from config import (
     ProdConfig, 
     DevConfig
 )
-import os
-from dotenv import load_dotenv
 from utils import notifyme
-from threading import Thread
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
-
-load_dotenv()
-
-
-app = Flask(__name__)
-limiter = Limiter(
-    app=app,
-    key_func=get_remote_address,
-    default_limits=[] # defaults are applied to all request types.
+from models import (
+    User,
+    Message
 )
-
 
 
 if os.getenv('ENV') == 'production':
@@ -37,6 +35,17 @@ elif os.getenv('ENV') == 'development':
     app.config.from_object(DevConfig)
 else:
     raise NotImplementedError('** ! ENV not set. **')
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    flash('Please log in.', 'info')
+    return redirect(url_for('home'))
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -51,6 +60,7 @@ def home():
             return redirect(url_for('home'))
 
         flash('Your message has been sent.', 'success')
+        Message(email=email, text=message)
         Thread(target=notifyme, args=(f'New contact by {email}', message)).start()
 
         return redirect(url_for('home'))
@@ -60,6 +70,34 @@ def home():
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user_exists = User.query.filter_by(email=email).first()
+        if user_exists:
+            if user_exists.valid_password(password):
+                login_user(user_exists)
+                return redirect(url_for('admin'))
+            flash('Invalid password.', 'danger')
+            return redirect(url_for('login'))
+        flash('Invalid email.', 'danger')
+        return redirect(url_for('login'))
+    return render_template('login.html')
+
+
+@app.route('/admin')
+@login_required
+def admin():
+    messages = sorted(
+        Message.query.all(),
+        key=lambda x: x.timestamp,
+        reverse=True
+    )
+    return render_template('protected/admin.html', messages=messages)
 
 
 @app.errorhandler(404)

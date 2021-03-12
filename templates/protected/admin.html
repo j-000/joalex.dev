@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>joalex.dev | Python Developer | Full-Stack Developer | Freelancer | Admin </title>
+{% endblock %}
+
+{% block body %}
+<h1>Admin</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Datetime</td>
+      <td>Email</td>
+      <td>Message</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for msg in messages %}
+    <tr>
+      <td>{{msg.id}}</td>
+      <td>{{msg.timestamp}}</td>
+      <td>{{msg.email}}</td>
+      <td>{{msg.text}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
