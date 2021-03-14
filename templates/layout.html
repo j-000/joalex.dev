@@ -8,6 +8,7 @@
     From static websites to fully fledged web apps. Prices from £49. Get in touch hello@joalex.dev.">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" href="{{ url_for('static', filename='imgs/favicon-32x32.png')}}" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     {% block head %}{% endblock %}
@@ -32,23 +33,26 @@
             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#about-me">About me</a>
+            <a class="nav-link active" href="/#about-me">About me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#services">Services</a>
+            <a class="nav-link active" href="/#services">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#pricing">Pricing</a>
+            <a class="nav-link active" href="/#pricing">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('projects') }}">Projects</a>
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            <a class="nav-link active" href="{{ url_for('logout') }}">Logout</a>
           </li>
           {% endif %}
         </ul>
       </div>
       <div class="navbar-text">
-        hello@joalex.dev
+        <strong>hello@joalex.dev</strong>
 
         {% if current_user.is_authenticated %}
         <span class="badge badge-pill badge-success">Logged in!</span>
