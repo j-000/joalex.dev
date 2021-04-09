@@ -62,3 +62,7 @@ class Message(Base):
         self.text = text
         db.add(self)
         db.commit()
+
+    def delete(self):
+        db.delete(self)
+        db.commit()

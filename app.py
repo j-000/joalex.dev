@@ -61,8 +61,9 @@ def home():
             return redirect(url_for('home'))
 
         flash('Your message has been sent.', 'success')
-        Message(email=email, text=message)
-        Thread(target=notifyme, args=(f'New contact by {email}', message)).start()
+        if app.config.get('ENV') == 'production':
+            Message(email=email, text=message)
+            Thread(target=notifyme, args=(f'New contact by {email}', message)).start()
 
         return redirect(url_for('home'))
     return render_template('home.html')
@@ -101,9 +102,19 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
+    if request.method == 'POST':
+        mid = request.form.get('message_id')
+        try:
+            m = Message.query.get(int(mid))
+            if m:
+                m.delete()
+        except ValueError:
+            pass
+        return redirect(url_for('admin'))
+
     messages = sorted(
         Message.query.all(),
         key=lambda x: x.timestamp,

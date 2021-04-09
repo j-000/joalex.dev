@@ -14,6 +14,7 @@
       <td>Datetime</td>
       <td>Email</td>
       <td>Message</td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,12 @@
       <td>{{msg.timestamp}}</td>
       <td>{{msg.email}}</td>
       <td>{{msg.text}}</td>
+      <td>
+        <form action="/admin" method="post">
+          <input type="hidden" name="message_id" value="{{ msg.id }}" id="M{{ msg.id }}">
+          <input type="submit" value="Delete" name="delete" id="delete">
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
