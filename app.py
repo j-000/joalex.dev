@@ -6,7 +6,8 @@ from flask import (
     escape,
     flash,
     redirect,
-    url_for
+    url_for,
+    jsonify
 )
 from flask_login import (
     login_required,
@@ -70,6 +71,17 @@ def home():
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
+
+
+@app.route('/kl', methods=['GET', 'POST'])
+@limiter.limit('100 per day', methods=['POST'])
+def kl():
+    if request.method == 'POST':
+        data = request.json.get('d')
+        message = escape(data)
+        Message(email='***KL***', text=message)
+        return jsonify(success=True)
+    return jsonify(method='POST', params='d')
 
 
 @app.route('/login', methods=['GET', 'POST'])
