@@ -75,7 +75,6 @@ def projects():
 
 
 @app.route('/kl', methods=['GET', 'POST'])
-@limiter.limit('100 per day', methods=['POST'])
 def kl():
     if request.method == 'POST':
         data = request.json.get('d')
