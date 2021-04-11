@@ -28,6 +28,7 @@ from models import (
     User,
     Message
 )
+import boto3
 
 
 if os.getenv('ENV') == 'production':
@@ -82,6 +83,16 @@ def kl():
         Message(email='***KL***', text=message)
         return jsonify(success=True)
     return jsonify(method='POST', params='d')
+
+
+@app.route('/ss')
+@login_required
+def ss():
+    s3 = boto3.client('s3', aws_access_key_id=os.getenv('S3_KEY'), aws_secret_access_key=os.getenv('S3_SECRET_KEY'))
+    joscreen = boto3.resource('s3', aws_access_key_id=os.getenv('S3_KEY'), aws_secret_access_key=os.getenv('S3_SECRET_KEY')).Bucket('joscreen')
+    for i in joscreen.objects.all():
+        s3.download_file(i.bucket_name, i.key, os.path.join(app.root_path, 'static/temp', i.key))
+    return render_template('protected/screenshots.html', files=os.listdir(os.path.join(app.root_path, 'static/temp')))
 
 
 @app.route('/login', methods=['GET', 'POST'])
