@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>joalex.dev | Python Developer | Full-Stack Developer | Freelancer | Admin </title>
+{% endblock %}
+
+{% block body %}
+<h3>{{ pawn.name }}</h3>
+<table class="table table-sm table-light table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Datetime</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for msg in messages %}
+    <tr>
+      <td>#{{msg.id}}</td>
+      <td>{{msg.timestamp}}</td>
+      <td>{{msg.text}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -7,13 +7,17 @@ from sqlalchemy import (
     DateTime,
     String,
     Boolean,
-    Text
+    Text,
+    ForeignKey
 )
+from sqlalchemy.orm import relationship
 import datetime
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash
 )
+import humanize
+
 
 Base = declarative_base()
 
@@ -48,17 +52,48 @@ class User(Base, UserMixin):
         return check_password_hash(self.password, pwd)
 
 
+class Pawn(Base):
+    __tablename__ = 'pawns'
+
+    query = db.query_property()
+    id = Column(Integer, primary_key=True)
+    messages = relationship("Message", backref="pawn")
+    timestamp = Column(DateTime(), default=datetime.datetime.utcnow)
+    name = Column(String(20), nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+        db.add(self)
+        db.commit()
+
+    def __repr__(self):
+        return f'<Pawn {self.name} >'
+
+    def get_total_messages(self):
+        return len(self.messages)
+
+    def get_last_message_timestamp(self):
+        if len(self.messages) > 0:
+            msg_t = self.messages[-1].timestamp
+            delta = datetime.datetime.utcnow() - msg_t
+            return humanize.naturaltime(delta)
+        return 'No messages'
+
+    def add_message(self, message):
+        Message(message, self.id)
+
+
 class Message(Base):
     __tablename__ = 'messages'
 
     query = db.query_property()
     id = Column(Integer, primary_key=True)
     timestamp = Column(DateTime(), default=datetime.datetime.utcnow)
-    email = Column(String(30))
     text = Column(Text())
+    pawn_id = Column(Integer, ForeignKey('pawns.id'), nullable=True)
 
-    def __init__(self, email, text):
-        self.email = email
+    def __init__(self, text, p_id):
+        self.pawn_id = p_id
         self.text = text
         db.add(self)
         db.commit()
@@ -66,3 +101,4 @@ class Message(Base):
     def delete(self):
         db.delete(self)
         db.commit()
+

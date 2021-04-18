@@ -6,8 +6,8 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine
 from flask_login import LoginManager
 
-
 app = Flask(__name__)
+
 
 engine = create_engine('sqlite:///data.db', convert_unicode=True, connect_args={'check_same_thread': False})
 db = scoped_session(

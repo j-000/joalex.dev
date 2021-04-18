@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block head %}
+<title>joalex.dev | Python Developer | Full-Stack Developer | Freelancer | Admin </title>
+{% endblock %}
+
+{% block body %}
     {% for file in files %}
+    <p>{{ file }}</p>
     <img src="{{ url_for('static', filename='temp/' + file) }}" alt="" width="400">
     {% endfor %}
-</body>
-</html>
+{% endblock %}

