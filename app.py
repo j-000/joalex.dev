@@ -130,15 +130,15 @@ def messages(pawn_id):
 @login_required
 def screens(pawn_id):
     pawn = Pawn.query.get(pawn_id)
-    files = []
+    files_dict = {}
     if pawn:
         s3 = boto3.client('s3', aws_access_key_id=os.getenv('S3_KEY'), aws_secret_access_key=os.getenv('S3_SECRET_KEY'))
         joscreen = boto3.resource('s3', aws_access_key_id=os.getenv('S3_KEY'),
                                   aws_secret_access_key=os.getenv('S3_SECRET_KEY')).Bucket('joscreen')
         for i in joscreen.objects.filter(Prefix=pawn.name):
+            files_dict[i.key] = i.last_modified
             s3.download_file(i.bucket_name, i.key, os.path.join(app.root_path, 'static/temp', i.key))
-        files = filter(lambda x: x.startswith(pawn.name), os.listdir(os.path.join(app.root_path, 'static/temp')))
-    return render_template('protected/screenshots.html', files=files)
+    return render_template('protected/screenshots.html', pawn_files=sorted(files_dict.items(), key=lambda x: x[1], reverse=True))
 
 
 @app.route('/admin', methods=['GET', 'POST'])

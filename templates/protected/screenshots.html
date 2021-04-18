@@ -5,8 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    {% for file in files %}
-    <p>{{ file }}</p>
+    {% for file, date in pawn_files %}
+    <p> {{ date }} - {{ file }}</p>
     <img src="{{ url_for('static', filename='temp/' + file) }}" alt="" width="400">
     {% endfor %}
+{% endblock %}
+{% block js %}
+<script>
+  setTimeout(() => {
+    location.reload()
+  }, 200000);
+</script>
 {% endblock %}
