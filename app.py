@@ -27,6 +27,7 @@ from models import (
     Pawn,
 )
 import boto3
+from werkzeug.utils import secure_filename
 
 
 if os.getenv('ENV') == 'production':
@@ -63,6 +64,25 @@ def home():
 
         return redirect(url_for('home'))
     return render_template('home.html')
+
+
+@app.route('/soktr')
+def soktr():
+    return jsonify(on=True)
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return jsonify(success=False, message='No file part')
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify(success=False, message='No file part')
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(os.path.join(app.root_path, 'uploads'), filename))
+            return jsonify(success=True)
 
 
 @app.route('/projects')
