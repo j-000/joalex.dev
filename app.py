@@ -81,8 +81,9 @@ def upload_file():
             return jsonify(success=False, message='No file part')
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(os.path.join(app.root_path, 'uploads'), filename))
+            file.save(os.path.join(app.config.get('UPLOAD_FOLDER'), filename))
             return jsonify(success=True)
+    return jsonify(method='POST only')
 
 
 @app.route('/projects')
