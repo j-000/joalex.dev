@@ -21,7 +21,7 @@ class ProdConfig(Config):
     ENV = 'production'
     SERVER_NAME = 'joalex.dev'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///prod.db'
-    UPLOAD_FOLDER = '/home/ubuntu/joalex.dev/uploads'
+    UPLOAD_FOLDER = '/app/uploads'
 
 
 
