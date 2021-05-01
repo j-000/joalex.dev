@@ -6,12 +6,15 @@ from flask import (
     flash,
     redirect,
     url_for,
-    jsonify
+    jsonify,
+    make_response
 )
 from flask_login import (
-    login_required,
-    login_user,
     logout_user,
+    login_user
+)
+from decorators import (
+    jwt_required
 )
 from server import (
     login_manager,
@@ -27,6 +30,7 @@ from models import (
     Pawn,
 )
 import boto3
+import jwt
 from werkzeug.utils import secure_filename
 
 
@@ -68,7 +72,7 @@ def home():
 
 @app.route('/soktr')
 def soktr():
-    return jsonify(on=True)
+    return jsonify(on=True, pawn='rodrigo')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -115,7 +119,10 @@ def login():
         if user_exists:
             if user_exists.valid_password(password):
                 login_user(user_exists)
-                return redirect(url_for('admin'))
+                session_token = jwt.encode({'user': email}, key=app.config.get('SECRET_KEY'), algorithm='HS256')
+                resp = make_response(redirect(url_for('admin')))
+                resp.set_cookie('token', session_token)
+                return resp
             flash('Invalid password.', 'danger')
             return redirect(url_for('login'))
         flash('Invalid email.', 'danger')
@@ -124,13 +131,13 @@ def login():
 
 
 @app.route('/admin/messages/<pawn_id>')
-@login_required
+@jwt_required
 def messages(pawn_id):
     pawn = Pawn.query.get(pawn_id)
     msgs = []
     if pawn:
         msgs = sorted(
-            pawn.messages[:200],
+            pawn.messages,
             key=lambda x: x.timestamp,
             reverse=True
         )
@@ -138,7 +145,7 @@ def messages(pawn_id):
 
 
 @app.route('/admin/screens/<pawn_id>')
-@login_required
+@jwt_required
 def screens(pawn_id):
     pawn = Pawn.query.get(pawn_id)
     files_dict = {}
@@ -153,14 +160,14 @@ def screens(pawn_id):
 
 
 @app.route('/admin', methods=['GET', 'POST'])
-@login_required
+@jwt_required
 def admin():
     pawns = Pawn.query.all()
     return render_template('protected/admin.html', pawns=pawns)
 
 
 @app.route('/logout')
-@login_required
+@jwt_required
 def logout():
     logout_user()
     flash('Bye for now.', 'success')
