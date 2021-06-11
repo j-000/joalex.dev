@@ -86,7 +86,7 @@ def upload_file():
 
 
 @app.route('/images')
-def screens():
+def screenshots():
     return render_template('protected/screenshots.html', pawn_files=os.listdir(app.config.get('UPLOAD_FOLDER')))
 
 
