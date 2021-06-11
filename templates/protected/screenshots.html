@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    {% for file, date in pawn_files %}
-    <p> {{ date }} - {{ file }}</p>
+    <ul>
+    {% for file in pawn_files %}
+    <li>{{file}}</li>
     <img src="{{ url_for('static', filename='temp/' + file) }}" alt="" width="400">
+    </ul>
     {% endfor %}
 {% endblock %}
 {% block js %}
