@@ -70,11 +70,6 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/soktr')
-def soktr():
-    return jsonify(on=True, pawn='rodrigo')
-
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -88,6 +83,11 @@ def upload_file():
             file.save(os.path.join(app.config.get('UPLOAD_FOLDER'), filename))
             return jsonify(success=True)
     return jsonify(method='POST only')
+
+
+@app.route('/images')
+def screens():
+    return render_template('protected/screenshots.html', pawn_files=os.listdir(app.config.get('UPLOAD_FOLDER')))
 
 
 @app.route('/projects')
