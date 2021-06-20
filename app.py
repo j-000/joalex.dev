@@ -32,7 +32,7 @@ from models import (
 import boto3
 import jwt
 from werkzeug.utils import secure_filename
-
+from natsort import natsorted
 
 if os.getenv('ENV') == 'production':
     app.config.from_object(ProdConfig)
@@ -88,7 +88,8 @@ def upload_file():
 @app.route('/images')
 @jwt_required
 def screenshots():
-    return render_template('protected/screenshots.html', pawn_files=os.listdir(app.config.get('UPLOAD_FOLDER')))
+    pawn_files = natsorted(os.listdir(app.config.get('UPLOAD_FOLDER')))
+    return render_template('protected/screenshots.html', pawn_files=pawn_files)
 
 
 @app.route('/projects')
