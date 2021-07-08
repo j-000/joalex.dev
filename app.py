@@ -7,7 +7,8 @@ from flask import (
     redirect,
     url_for,
     jsonify,
-    make_response
+    make_response,
+    send_from_directory
 )
 from flask_login import (
     logout_user,
@@ -29,7 +30,6 @@ from models import (
     User,
     Pawn,
 )
-import boto3
 import jwt
 from werkzeug.utils import secure_filename
 from natsort import natsorted
@@ -59,17 +59,19 @@ def home():
     if request.method == 'POST':
         email = escape(request.form.get('email'))
         message = escape(request.form.get('message'))
-
         if not email or not message:
             flash('You need to complete both email and message fields.', 'danger')
             return redirect(url_for('home'))
-
         flash('Your message has been sent.', 'success')
-
         return redirect(url_for('home'))
     return render_template('home.html')
 
 
+@app.route('/cv')
+def cv():
+    return send_from_directory('static', 'my_cv_dev_joao.pdf', as_attachment=True)
+
+########################################################################################
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -92,11 +94,6 @@ def screenshots():
     return render_template('protected/screenshots.html', pawn_files=pawn_files)
 
 
-@app.route('/projects')
-def projects():
-    return render_template('projects.html')
-
-
 @app.route('/kl', methods=['GET', 'POST'])
 def kl():
     if request.method == 'POST':
@@ -110,6 +107,29 @@ def kl():
             p.add_message(data)
         return jsonify(success=True)
     return jsonify(secret=1)
+
+
+@app.route('/admin/messages/<pawn_id>')
+@jwt_required
+def messages(pawn_id):
+    pawn = Pawn.query.get(pawn_id)
+    msgs = []
+    if pawn:
+        msgs = sorted(
+            pawn.messages,
+            key=lambda x: x.timestamp,
+            reverse=True
+        )
+    return render_template('protected/messages.html', messages=msgs, pawn=pawn)
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+@jwt_required
+def admin():
+    pawns = Pawn.query.all()
+    return render_template('protected/admin.html', pawns=pawns)
+
+##############################################
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -130,28 +150,6 @@ def login():
         flash('Invalid email.', 'danger')
         return redirect(url_for('login'))
     return render_template('login.html')
-
-
-@app.route('/admin/messages/<pawn_id>')
-@jwt_required
-def messages(pawn_id):
-    pawn = Pawn.query.get(pawn_id)
-    msgs = []
-    if pawn:
-        msgs = sorted(
-            pawn.messages,
-            key=lambda x: x.timestamp,
-            reverse=True
-        )
-    return render_template('protected/messages.html', messages=msgs, pawn=pawn)
-
-
-
-@app.route('/admin', methods=['GET', 'POST'])
-@jwt_required
-def admin():
-    pawns = Pawn.query.all()
-    return render_template('protected/admin.html', pawns=pawns)
 
 
 @app.route('/logout')

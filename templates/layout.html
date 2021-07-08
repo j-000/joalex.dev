@@ -11,9 +11,10 @@
     <link rel="icon" href="{{ url_for('static', filename='imgs/favicon-32x32.png')}}" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {% block head %}{% endblock %}
 </head>
-<body class="p-3">
+<body>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -21,52 +22,30 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #00cac9!important;">
-      <a class="navbar-brand text-white bg-dark pl-3 pr-3" href="#" style="">joalex.dev</a>
+    <div class="row">
+        <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse"
               data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+          <li class="nav-item">
+            <a class="nav-link active" href="/#about-me">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/#about-me">About me</a>
+            <a class="nav-link active" href="{{ url_for('cv') }}">CV</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/#pricing">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('projects') }}">Projects <span class="badge badge-success">New</span></a>
-          </li>
-          {% if current_user.is_authenticated %}
-            <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ url_for('admin') }}">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-secondary" href="{{ url_for('logout') }}">Logout</a>
-          </li>
-          {% endif %}
         </ul>
       </div>
       <div class="navbar-text">
         <strong>hello@joalex.dev</strong>
-
-        {% if current_user.is_authenticated %}
-        <span class="badge badge-pill badge-success">Logged in!</span>
-        {% endif %}
-
       </div>
     </nav>
-
-    <div class="m-3">
-      {% block body %}{% endblock %}
+        </div>
     </div>
+    {% block body %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     

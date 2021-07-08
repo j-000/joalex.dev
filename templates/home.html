@@ -5,127 +5,42 @@
 {% endblock %}
 
 {% block body %}
-  <div class="row">
+  <div id="intro" class="row text-center m-0">
     <div class="col">
-      <img 
-        class="mt-5"
-        id="code-img" 
-        src="{{ url_for('static', filename='imgs/code_2.png') }}" 
-        alt="Some random bit of code from wools.joao.dev project">
-    </div>
-    <div id="intro" class="col-md-6 p-4">
-      <h1 class="text-white">&lt; Full-Stack Python Developer &gt;</h1>
-      <p class="text-white mt-4 p-3">Hi, my name is <span class="bg-dark">João</span> and I'm a developer.</p>
-      <p class="text-white">
-        <small>Contact me <span class="bg-dark">hello@joalex.dev</span></small>
-      </p>
-      <div class="row">
-        <div class="col">
-          <a class="btn mt-4 btn-light btn-lg" href="#get-in-touch">Say hello</a>
-        </div>
+      <h1 class="text-white"><span class="bg-dark">&nbsp; João Oliveira &nbsp; </span> </h1>
+      <h3 id="subinto">Python Developer</h3>
+      <div class="row" style="font-size:3rem;">
+        <div class="col-3 m-auto"><a style="color: rgb(0,202,201)!important;" target="_blank" href="https://www.linkedin.com/in/joao-oliveira-b2934516b/"><i class="fab fa-linkedin"></i></a></div>
+        <div class="col-3 m-auto"><a style="color: rgb(0,202,201)!important;" href="https://github.com/j-000" target="_blank"><i class="fab fa-github"></i></a></div>
       </div>
     </div>
   </div>
-  <div class="row bg-light" style="margin-top: 500px; margin-bottom:100px; z-index:1000; min-height: 50vh;">
-    <div class="col-md-8 m-auto">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container p-3 ">
+  <div class="row" style="margin: 200px 0 200px 0;">
+    <div class="col p-0">
+      <div class="jumbotron jumbotron-fluid p-3">
+        <div class="container">
           <h2 class="" style="margin-bottom:20px;"><span class="bg-dark text-white text-center pr-3 pl-3" id="about-me">About me</span></h2>
           <p class="" style="margin-top:20px;">I am a Computer Science student at the University of London.</p>
-          <p class="">I have been developing web applications using python, on a commercial (freelancer) and project basis for 4 years.</p>
-          <p class="">Some of my most notorious completed projects are <a href="{{ url_for('projects') }}">listed on this page</a>.
+          <p class="">I develop web applications using python, on a commercial, freelancer and project basis.</p>
+          <p class="">In my free time, I like to read about finance, business and learn about new tech.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="row bg-light" style="margin-top: 300px; margin-bottom:100px; z-index:1000; min-height: 50vh; text-align:justify;">
-    <div class="col-md-8 m-auto">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container p-3">
-          <h2 class="" style="margin-bottom:20px;">
-            <span class="bg-dark text-white text-center pr-3 pl-3" id="services">Services</span></h2>
-          <div class="row">
-            <div class="col">
-              <h3>Back-end Development</h3>
-              <p>I specialise in back-end development using cutting-edge technologies such as Python (Django and Flask) and Java.</p>
-              <p>Depending on your project, you may not even need a server at all. Static websites can be perfectly suitable for your business needs.</p>
-            </div>
-            <div class="col">
-              <h3>Front-end Development</h3>
-              <p>Using cutting-edge technologies such as HTML5, CSS3 and JavaScript, I will ensure your responsive website is exactly what you were expecting.</p>
-              <p>It's important to add that I will also ensure your website is fully responsive to give your users the best online experience.</p>
-            </div>
-           
-          </div>
-          <div class="row">
-            <div class="col">
-              <h3>SEO Implementation</h3>
-              <p>The websites I develop are SEO-friendly which means they come with the basic techniques of search engine optimisation already implemented in order to increase their chances of ranking higher on the Google SERPs.</p>
-            </div>
-          </div>
+  <div class="row" style="margin: 200px 0 200px 0;">
+    <div class="col p-0">
+      <div class="jumbotron jumbotron-fluid p-3">
+        <div class="container">
+          <h2 class="" style="margin-bottom:20px;"><span class="bg-dark text-white text-center pr-3 pl-3">My CV</span></h2>
+          <p>Click to download my CV.</p>
+          <p class=""><a href="{{ url_for('cv') }}"><img src="{{ url_for('static', filename='imgs/cv_i.JPG') }}" alt="" width="200"></a></p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row bg-light" style="margin-top: 300px; z-index:1000; min-height: 50vh;">
-    <div class="col-md-8 m-auto">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container p-3">
-          <h2 class=""><span class="bg-dark text-white text-center pr-3 pl-3">Why choose a freelancer?</span></h2>
-          <p style="margin-top:20px;">You will certainly get a better deal all-round, using my services as a freelancer.</p>
-          <p class="">The cost of your project is likely to be more affordable without compromising on quality.</p>
-          <p>Plus, freelancers like myself are much more flexible with meetings and time frames.</p>
-          <p>Finally, you will be in touch with a single person - more dedicated and personalized service than that, there is none.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row bg-light" style="margin-top: 300px; z-index:1000; min-height: 50vh;">
-    <div class="col-md-8 m-auto">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container p-3">
-          <h2 class=""><span class="bg-dark text-white text-center pr-3 pl-3" id="pricing">Quotes and pricing</span></h2>
-          <p style="margin-top:20px;">Projects tend to be very personalised and it isn't always possible to provide an accurate estimate without knowing your requirements.</p>
-          <div class="row">
-            <div class="col">
-              <div class="card text-dark" style="height: 15rem; width: 15rem; background-color: rgba(0,170,170,0.5); margin-top:20px;">
-                <div class="card-body">
-                  <h5 class="card-title">Basic Projects</h5>
-                  <p class="card-text">Usually includes static websites, website design and SEO implementation.</p>
-                  <h2><span class="bg-dark text-white">&nbsp;from £49&nbsp;</span></h2>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card text-dark" style="height: 15rem; width: 15rem;background-color: rgba(0,170,170, 0.5); margin-top:20px;">
-                <div class="card-body">
-                  <h5 class="card-title">Complex Projects</h5>
-                  <p class="card-text">Fully fledged applications, with respective servers and business logic.</p>
-                  <h2><span class="bg-dark text-white">&nbsp;from £199&nbsp;</span></h2>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p style="margin-top: 20px;">These prices are indicative only and do not include the cost of third party services.
-            The best idea is to have a chat over a cup of coffee so you can tell me more about your project.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" style="margin-top: 200px;">
-    <div class="col-md-5 m-auto" id="get-in-touch">
-      <form action="/" method="POST">
-        <h2 class="text-white">Say hello</h2>
-        <div class="form-group mt-4">
-          <input type="email" class="form-control" name="email" placeholder="Your email" required>
-          <small id="emailHelp" class="form-text text-muted">Your email will not be stored.</small>
-        </div>
-        <textarea required placeholder="Your message here..." class="form-control mt-4" name="message" id="message" cols="30" rows="10"></textarea>
-        <button type="submit" class="btn btn-dark mt-4">Submit</button>
-      </form>
-    </div>
-  </div>
+
+
 {% endblock %}
 
 {% block js %}
