@@ -1,6 +1,9 @@
 from flask_login import UserMixin
 from sqlalchemy.ext.declarative import declarative_base
-from server import db
+from server import (
+    db,
+    app
+)
 from sqlalchemy import (
     Column,
     Integer,
@@ -17,6 +20,7 @@ from werkzeug.security import (
     check_password_hash
 )
 import humanize
+import jwt
 
 
 Base = declarative_base()
@@ -50,6 +54,17 @@ class User(Base, UserMixin):
 
     def valid_password(self, pwd):
         return check_password_hash(self.password, pwd)
+
+    @staticmethod
+    def decode_token(token):
+        try:
+            tk = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        except Exception as e:
+            return False
+        user = User.query.filter_by(email=tk['user']).first()
+        if not user or not user.is_admin:
+            return False
+        return user
 
 
 class Pawn(Base):

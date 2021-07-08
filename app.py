@@ -146,9 +146,9 @@ def login():
                 resp.set_cookie('token', session_token)
                 return resp
             flash('Invalid password.', 'danger')
-            return redirect(url_for('login'))
+            return render_template('login.html')
         flash('Invalid email.', 'danger')
-        return redirect(url_for('login'))
+        return render_template('login.html')
     return render_template('login.html')
 
 
@@ -157,7 +157,7 @@ def login():
 def logout():
     logout_user()
     flash('Bye for now.', 'success')
-    return redirect(url_for('home'))
+    return render_template('home.html')
 
 
 @app.errorhandler(404)

@@ -1,20 +1,20 @@
 from functools import wraps
 from flask import (
     request,
-    redirect,
-    url_for
+    render_template,
+    flash
 )
-import jwt
-from server import app
+from models import User
 
 
 def jwt_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         token = request.cookies.get('token')
-        if token:
-            email = jwt.decode(token, key=app.config.get('SECRET_KEY'), algorithms='HS256')
+        user = User.decode_token(token)
+        if user:
             return f(*args, **kwargs)
         else:
-            return redirect(url_for('login'))
+            flash('Invalid token - login again.', 'danger')
+            return render_template('login.html')
     return wrapper
