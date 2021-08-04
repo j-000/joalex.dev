@@ -7,7 +7,6 @@ from flask import (
 )
 
 
-os.environ['ENV'] = 'development'
 
 if os.getenv('ENV') == 'production':
     app.config.from_object(config.ProdConfig)
