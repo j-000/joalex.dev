@@ -7,17 +7,10 @@
 
 # My Personal Website
 
-This is my personal website. Come have a look.
+This is my personal website -> joalex.dev.
 
 # Tech details
 
-This project uses Flask for the backend and itt built in jinja2 templating engine to serve HTML pages.
+100% Flask, Python, HTML, CSS. 
 
-Nginx is used to serve the flask app.
-
-The application is also contained using Docker and at any given time there are 2 apps running simultaneously.
-
-There is no database connected. When the contact form is 
-used, SMTP library sends me an email with all the details (escaped!).
-
-I use Flask-Limiter to limit POST requests (form) to 3 per day.
+NGINX used to serve static content, Docker to containerize it and Digital Ocean Droplet to host it. 
