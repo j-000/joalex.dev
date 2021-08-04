@@ -12,44 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script data-ad-client="ca-pub-1938438106004417" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{category}}">{{message}}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <div class="row">
-        <div class="col">
-                <nav class="navbar navbar-expand-lg navbar-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-              data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="/#about-me">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('cv') }}">CV</a>
-          </li>
-        </ul>
+    <div class="row mb-5">
+      <div class="col">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="navbar-text">
+            <strong class="ml-5">joalex.dev</strong>
+          </div>
+        </nav>
       </div>
-      <div class="navbar-text">
-        <strong>hello@joalex.dev</strong>
-      </div>
-    </nav>
-        </div>
     </div>
     {% block body %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
-    
     {% block js %}{% endblock %}
 </body>
 </html>

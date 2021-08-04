@@ -5,70 +5,88 @@
 {% endblock %}
 
 {% block body %}
-  <div id="intro" class="row text-center m-0 ">
-    <div class="col">
-      <h1 class="text-white"><span class="bg-dark">&nbsp; João Oliveira &nbsp; </span> </h1>
-      <h3 id="subinto">Python Developer</h3>
-      <div class="row" style="font-size:3rem;">
-        <div class="col-3 m-auto"><a style="color: rgb(0,202,201)!important;" target="_blank" href="https://www.linkedin.com/in/joao-oliveira-b2934516b/"><i class="fab fa-linkedin"></i></a></div>
-        <div class="col-3 m-auto"><a style="color: rgb(0,202,201)!important;" href="https://github.com/j-000" target="_blank"><i class="fab fa-github"></i></a></div>
-      </div>
+  <div class="row text-center">
+    <div class="col pr-0">
+      <img class="mb-5" src="{{ url_for('static', filename='prog.svg') }}" alt="Programer svg image" width="85%">
+      <h1 class="text-white mt-3"><span class="bg-dark">&nbsp; João Oliveira &nbsp; </span> </h1>
+      <h2 class="mt-4 mb-5">Python Developer</h2>
     </div>
   </div>
-  <div class="row" style="margin: 200px 0 200px 0;">
-    <div class="col p-0">
-      <div class="jumbotron jumbotron-fluid p-3">
-        <div class="container">
-          <h2 class="" style="margin-bottom:20px;"><span class="bg-dark text-white text-center pr-3 pl-3" id="about-me">About me</span></h2>
-          <p class="" style="margin-top:20px;">I am a Computer Science student at the University of London.</p>
-          <p class="">I develop web applications using python, on a commercial, freelancer and project basis.</p>
-          <p class="">In my free time, I like to read about finance, business and learn about new tech.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-<div class="row" style="margin: 200px 0 200px 0;">
-    <div class="col p-0">
-      <div class="jumbotron jumbotron-fluid p-3">
-        <div class="container">
-          <h2 class="" style="margin-bottom:20px;"><span class="bg-dark text-white text-center pr-3 pl-3">Tech</span></h2>
-          <div class="row" style="font-size:4rem;">
-            <div class="col">
-              <i class="fab fa-python"></i>
-            </div>
-            <div class="col">
-              <i class="fab fa-html5"></i>
-            </div>
-            <div class="col">
-              <i class="fab fa-css3-alt"></i>
-            </div>
-            <div class="col">
-              <i class="fab fa-js-square"></i>
-            </div>
-            <div class="col">
-              <i class="fab fa-vuejs"></i>
-            </div>
-            <div class="col">
-              <i class="fab fa-docker"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" style="margin: 200px 0 200px 0;">
-    <div class="col p-0">
-      <div class="jumbotron jumbotron-fluid p-3">
-        <div class="container">
-          <h2 class="" style="margin-bottom:20px;"><span class="bg-dark text-white text-center pr-3 pl-3">My CV</span></h2>
-          <p>Click to download my CV.</p>
-          <p class=""><a href="{{ url_for('cv') }}"><img src="{{ url_for('static', filename='imgs/cv_i.JPG') }}" alt="" width="200"></a></p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="mt-5 mb-5">&nbsp;</div>
+  <div class="row pl-5 pr-5 mt-5">
+    <div class="col text-center">
+      <img src="{{ url_for('static', filename='grad.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">I am a <span class="wordshine">Computer Science</span> student at Birkbeck, University of London.</p>     
 
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
 
+      <img src="{{ url_for('static', filename='prog2.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">I develop web applications using <span class="wordshine">Python</span> and <span class="wordshine">JavaScript</span>.</p>
+
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='staticweb.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">My skills include 
+        <span class="wordshine">HTML</span>,
+        <span class="wordshine">CSS</span>,
+        <span class="wordshine">JavaScript</span>,
+        <span class="wordshine">Python</span> and
+        <span class="wordshine">SQL</span>
+      .</p>   
+
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='sourcecode.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">I am also familiar with development frameworks such as 
+        <span class="wordshine">Flask</span>,
+        <span class="wordshine">FastAPI</span>,
+        <span class="wordshine">Django</span>,
+        <span class="wordshine">VueJs</span> and
+        <span class="wordshine">React</span>
+      ...</p>   
+
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='scrum.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">... as well as 
+        <span class="wordshine">Git</span>,
+        <span class="wordshine">Docker</span>,
+        <span class="wordshine">ORMs</span>,
+        <span class="wordshine">UI Design</span>,
+        <span class="wordshine">TDD</span>
+        and much more.</p>   
+
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='read.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">In my free time, I like to read about 
+        <span class="wordshine">finance</span>, 
+        <span class="wordshine">business</span> and <span class="wordshine">new tech</span>.
+      </p>
+      
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='typing.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">There is only so much I can put here.</p>
+      <p>Feel free to download <span class="wordshine">my CV</span>.</p>
+
+      <a class="btn btn-info" href="{{ url_for('cv') }}">Get my CV</a>
+
+      <div class="mt-5 mb-5">&nbsp;</div>
+      <div class="mt-5 mb-5">&nbsp;</div>
+
+      <img src="{{ url_for('static', filename='contact.svg') }}" alt="Programer svg image" width="100%">
+      <p class="mt-4">Email me at <span class="wordshine">joao00alex@gmail.com</span></p>
+    </div>
+  </div>
+  <div class="mt-5 mb-5">&nbsp;</div>
+  <div class="mt-5 mb-5">&nbsp;</div>
 
 {% endblock %}
 

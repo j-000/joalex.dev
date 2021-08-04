@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="text-white text-center">You seem to be lost...</h1>
-<p class="text-center"><a href="{{ url_for('home') }}">Go back home</a></p>
+<div class="row">
+    <div class="col text-center">
+        <h1>There is <span class="wordshine">nothing</span> here... <a class="btn btn-info" href="{{ url_for('home') }}">Go home</a></h1>
+        <img src="{{ url_for('static', filename='search.svg') }}" alt="" width="100%">
+    </div>
+</div>
 {% endblock %}

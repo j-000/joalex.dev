@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="text-white text-center">Something went wrong...</h1>
-<p class="text-center"><a href="{{ url_for('home') }}">Go back home</a></p>
+<div class="row">
+    <div class="col text-center">
+        <h1>Server is <span class="wordshine">down</span>...</h1>
+        <img src="{{ url_for('static', filename='down.svg') }}" alt="" width="100%">
+    </div>
+</div>
 {% endblock %}
