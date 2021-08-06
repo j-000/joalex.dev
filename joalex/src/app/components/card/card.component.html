@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col text-center">
+    <img [src]="card.image" style="width: 85%" alt="Image" />
+    <div class="col-md-6 m-auto">
+      <p class="mt-5 pl-2 pr-2" [innerHtml]="card.htmlText"></p>
+    </div>
+    <div *ngIf="card.cv">
+      <a href="/cv" class="btn btn-info">Download CV</a>
+    </div>
+  </div>
+</div>

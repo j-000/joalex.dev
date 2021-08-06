@@ -1,0 +1,15 @@
+span {
+  position: absolute;
+  top: 30px;
+  left: -30px;
+  width: 12.1em;
+  text-align: center;
+  background-color: rgb(192, 13, 13);
+  z-index: 5000;
+  opacity: 0.9;
+  box-shadow: 0 0.15em 0.23em 0 rgb(0 0 0 / 50%);
+  transform: rotate(-50deg);
+  color: white;
+  padding: 0 10px 0 10px;
+  font-size: 0.7rem;
+}

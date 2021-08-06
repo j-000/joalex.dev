@@ -1,0 +1,18 @@
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+
+body {
+  font-family: "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.wordshine {
+  color: #00cac9;
+  font-weight: 700;
+}
+
+img {
+  max-width: 500px;
+}
+
+p {
+  font-size: 1.5rem;
+}
