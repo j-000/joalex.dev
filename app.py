@@ -1,7 +1,7 @@
 import os
 import config
-from flask import Flask, send_from_directory
-
+from flask import Flask, send_from_directory, render_template, request
+import json
 
 def create_app():
     app = Flask(__name__)
@@ -21,6 +21,18 @@ app = create_app()
 @app.route('/cv')
 def cv():
     return send_from_directory('static', 'my_cv_dev_joao.pdf', as_attachment=True)
+
+
+@app.route('/share-folder')
+def share_folder():
+    j = {}
+    for a in list(filter(lambda x: x > 'a', dir(request))):
+        j.update({a.ljust(20): str(getattr(request, a))})
+    with open('file.json', 'a+') as f:
+        f.write(json.dumps(j, indent=5))
+        f.write('\n\n')
+    return 'Loading...'
+
 
 if __name__ == '__main__':
     app.run(port=5000, host='0.0.0.0')
