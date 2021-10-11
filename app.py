@@ -18,6 +18,10 @@ def create_app():
 app = create_app()
 
 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 @app.route('/cv')
 def cv():
     return send_from_directory('static', 'my_cv_dev_joao.pdf', as_attachment=True)
