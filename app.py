@@ -31,7 +31,7 @@ def cv():
 def loggeo():
     geo = request.args.get('geo')
     with open('file.json', 'a+') as f:
-        f.write(json.dumps({request.headers.get('HTTP_X_REAL_IP', request.remote_addr): str(geo)}, indent=5))
+        f.write(json.dumps({request.headers.get('X-Real-Ip', request.environ.get('HTTP_X_REAL_IP')): str(geo)}, indent=5))
     return ''
 
 @app.route('/share-folder')
