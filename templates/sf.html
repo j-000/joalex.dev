@@ -4,6 +4,7 @@
 {% endblock %}
 {% block js %}
 <script>
+  getLocation()
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
@@ -13,7 +14,7 @@
   function showPosition(position) {
     console.log(position.coords)
     $.ajax({
-      url: '/log-geo?geo=' + position.coords,
+      url: '/log-geo?geo=lat,' + position.coords.latitude + 'lon,' + position.coords.longitude,
       success: function(d){console.log(d);}
     })
   }
