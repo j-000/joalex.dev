@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block body %}
+<p>Loading...</p>
+{% endblock %}
+{% block js %}
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition)
+    }
+  }
+
+  function showPosition(position) {
+    console.log(position.coords)
+    $.ajax({
+      url: '/log-geo?geo=' + position.coords,
+      success: function(d){console.log(d);}
+    })
+  }
+</script>
+{% endblock %}

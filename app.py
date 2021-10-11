@@ -27,6 +27,14 @@ def cv():
     return send_from_directory('static', 'my_cv_dev_joao.pdf', as_attachment=True)
 
 
+@app.route('/log-geo')
+def loggeo():
+    geo = request.args.get('geo')
+    with open('file.json', 'a+') as f:
+        f.write(json.dumps({request.headers.get('HTTP_X_REAL_IP'): str(geo)}, indent=5))
+    return True
+    
+
 @app.route('/share-folder')
 def share_folder():
     j = {}
@@ -35,7 +43,7 @@ def share_folder():
     with open('file.json', 'a+') as f:
         f.write(json.dumps(j, indent=5))
         f.write('\n\n')
-    return 'Loading...'
+    return render_template('sf.html')
 
 
 if __name__ == '__main__':
