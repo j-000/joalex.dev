@@ -10,6 +10,8 @@ ENV ENV='production'
 
 EXPOSE 5000
 
-ENTRYPOINT ["python"]
-
-CMD ["app.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", \
+    "-w", "4", "--log-level=debug", \
+    "--access-logfile", "./shared_data/access.gunicorn.log", \
+    "--error-logfile", "./shared_data/error.gunicorn.log", \
+    "app"]
