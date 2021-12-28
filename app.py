@@ -16,7 +16,7 @@ def create_app():
 
 
 app = create_app()
-
+application = app
 
 @app.route('/')
 def home():
