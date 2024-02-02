@@ -1,0 +1,12 @@
+canvas {
+    background-image: url('background.png');
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    margin: 0;
+    /* overflow: hidden; */
+}

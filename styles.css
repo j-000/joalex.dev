@@ -212,12 +212,6 @@ RESET
   
   .page{
     padding: 2rem;
-    height: 100vh;
-    overflow-y: scroll;
-  }
-  
-  .page1::-webkit-scrollbar{
-    display: none;
   }
 
 

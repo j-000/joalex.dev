@@ -3,23 +3,14 @@ let data = [
     year: 2024,
     events: [
       {
-        title: "📜 AWS Certified Associate SysOps",
-        subtitle: "@AWS",
-        body: "Passed my AWS Associate DevOps .",
+        title: "🎮 Built Game 1",
+        subtitle: "@Home",
+        body: "Typescript Game. You can play it in <a href='projects.html'>/projects</a>",
         date: {
           day: "1",
-          month: "Apr"
+          month: "Feb"
         }
-      },
-      {
-        title: "Started a Masters",
-        subtitle: "@Univeristy of Hull",
-        body: "Started a MSc in Artificial Intelligence.",
-        date: {
-          day: "1",
-          month: "May"
-        }
-      },
+      }
     ]
   },
   {
